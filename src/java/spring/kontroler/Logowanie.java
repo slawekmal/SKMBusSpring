@@ -50,5 +50,15 @@ public class Logowanie {
 
         return model;
     }
+    
+    public boolean jestZalogowany(){
+        return zalogowany != null;
+    }
+    
+    @RequestMapping(value = "/wyloguj", method = RequestMethod.GET)
+    public String wyloguj(){
+        zalogowany = null;
+        return "redirect:/../";
+    }
 
 }

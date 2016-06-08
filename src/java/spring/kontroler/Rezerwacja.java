@@ -51,7 +51,7 @@ public class Rezerwacja {
                 }
                 klientService.updateKlient(Logowanie.zalogowany);
                 model.addAttribute("klient", Logowanie.zalogowany);
-                return "konto";
+                return "redirect:../../../konto";
             }
         }
         return "rezerwacja";

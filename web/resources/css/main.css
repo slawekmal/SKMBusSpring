@@ -1,0 +1,103 @@
+body {
+    background-color: #CCCCFF;
+}
+
+header {
+    background-image: url(../images/Bus.png);
+    color:white;
+    text-align:center;
+    padding:5px; 
+    height: 100px;
+}
+nav {
+    line-height:30px;
+    background-color: #9999ff;
+    height:500px;
+    width:130px;
+    float:left;
+    padding:5px; 
+    margin-top: 110px;
+}
+section {
+    margin-left: 200px;
+    width:800px;
+    float:left;
+    padding:10px; 
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 130px;
+    background-color: #9999ff;
+    height: 500px;
+    overflow: auto;
+    float:left;
+}
+
+li a {
+    display: block;
+    color: whitesmoke;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    display: inline-block;
+    text-align: right;
+    background-color: #9999ff;
+    border: none;
+    color: whitesmoke;
+    padding: 12px 26px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#regbtn {
+    display: inline-block;
+}
+
+#logbtn {
+    display: inline-block;
+}
+
+#logreg{
+    margin-top: 55px;
+    text-align: right;
+}
+
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #99ccff;
+    color: white;
+}
+
+th {
+    background-color: #9999ff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+table {
+    width: 600px;
+    margin-left: 50px;
+    border: 2px solid #9999ff;
+}
+
+h3 {
+    margin-left: 50px;
+}
