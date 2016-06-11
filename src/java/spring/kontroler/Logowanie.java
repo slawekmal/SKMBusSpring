@@ -22,7 +22,7 @@ public class Logowanie {
     public static Klient zalogowany;
     
    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView displayLogin(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView model = new ModelAndView("logowanie");
         Klient klient = new Klient();
         model.addObject("klient", klient);
@@ -30,7 +30,7 @@ public class Logowanie {
     }
 
     @RequestMapping(value = "/go", method = RequestMethod.POST)
-    public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("klient") Klient klient) throws SQLException {
+    public String zaloguj(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("klient") Klient klient) throws SQLException {
         ModelAndView model = null;
         try {
             this.zalogowany = klientService.isValidUser(klient.getEmail(), klient.getHaslo());
@@ -48,7 +48,7 @@ public class Logowanie {
             e.printStackTrace();
         }
 
-        return model;
+        return "redirect:/";
     }
     
     public boolean jestZalogowany(){

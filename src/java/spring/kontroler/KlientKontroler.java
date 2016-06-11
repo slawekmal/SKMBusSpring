@@ -15,6 +15,7 @@ import spring.db.KlientService;
 import spring.db.KursService;
 import spring.model.Klient;
 import spring.model.Kurs;
+import spring.model.Pomocnik;
 
 @Controller
 @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -24,10 +25,12 @@ public class KlientKontroler {
     private KlientService klientService;
     @Autowired
     private KursService kursService;
+    Pomocnik pomocnik;
 
     @RequestMapping(value = "/rejestracja", method = RequestMethod.GET)
     public String rejestracja(Model model) {
         model.addAttribute("klient", new Klient());
+        model.addAttribute("pomocnik", pomocnik);
         return "rejestracja";
     }
 
@@ -40,12 +43,22 @@ public class KlientKontroler {
         return "redirect:/rejestracja";
 
     }
+    
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(Model model){
+        pomocnik = new Pomocnik();
+        if(Logowanie.zalogowany != null)
+            pomocnik.setZalogowany(true);
+        model.addAttribute("pomocnik", pomocnik);
+        return "index";
+    }
 
     @RequestMapping(value = "/konto", method = RequestMethod.GET)
     public String konto(Model model) {
         List<Kurs> kursy = null;
         if(Logowanie.zalogowany != null)
             kursy = Logowanie.zalogowany.getKursy();
+        model.addAttribute("pomocnik", pomocnik);
         model.addAttribute("kursy", kursy);
         return "konto";
     }

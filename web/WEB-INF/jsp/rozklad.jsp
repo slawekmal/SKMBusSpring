@@ -13,14 +13,17 @@
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <section>
-            <form:form action="filtruj" modelAttribute="mfv" >
-                <form:select path="kierunek" >
-                    <form:option value="Wszystkie">--Wszystkie--</form:option>
-                    <form:option value="Hrubieszów - Lublin">Hrubieszów - Lublin</form:option>
-                    <form:option value="Lublin - Hrubieszów">Lublin - Hrubieszów</form:option>
-                </form:select>
-                <input type="submit" value="Filtruj" />
-            </form:form>
+                <div id="filtr">
+                <form:form action="filtruj" modelAttribute="pomocnik" >
+                    <label for="selKierunek"><b>Kierunek: </b></label>
+                    <form:select id="selKierunek" path="kierunek" >
+                        <form:option value="Wszystkie">--Wszystkie--</form:option>
+                        <form:option value="Hrubieszów - Lublin">Hrubieszów - Lublin</form:option>
+                        <form:option value="Lublin - Hrubieszów">Lublin - Hrubieszów</form:option>
+                    </form:select>
+                    <input type="submit" value="Filtruj" />
+                </form:form>
+            </div>
             <h3>Rozkład</h3>
             <c:if test="${!empty kursy}">
                 <table class="tg">
@@ -37,7 +40,14 @@
                             <td>${kurs.godzina}</td>
                             <td>${kurs.kierunek}</td>
                             <td>${kurs.miejsca}</td>
-                            <td><a href="<c:url value='rezerwuj/${kurs.id}' />" >Rezerwuj</a></td>
+                            <c:choose>
+                                <c:when test="${pomocnik.zalogowany}">
+                                    <td><a href="<c:url value='rezerwuj/${kurs.id}' />" >Rezerwuj</a></td>
+                                </c:when>    
+                                <c:otherwise>
+                                    <td>Zaloguj się by móc rezerwować miejsca</td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                 </table>

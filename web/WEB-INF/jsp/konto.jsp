@@ -17,42 +17,44 @@
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <section>
-            <c:if test="${logowanie.jestZalogowany()}" >
-                <input type="button" id="openDelDlg" value="Usuń konto" />
-                <div id="delDlg" title="Usuwanie konta">
-                    <p>Czy na pewno usunąć konto?</p>
-                    <form id="deleteAcc" action="usunkonto">
-                        <input type="submit" value="Tak" />
-                    </form>
-                    <form id="cancelDel">
-                        <input type="button" id="cancel" value="Anuluj" />
-                    </form>
-                </div>
-                <h3>Zarezerwowane miejsca</h3>
-                <c:if test="${!empty kursy}">
-                    <table class="tg">
-                        <tr>
-                            <th width="120">Data</th>
-                            <th width="120">Godzina</th>
-                            <th width="120">Kierunek</th>
-                            <th width="60">Usuń</th>
-                        </tr>
-                        <c:forEach items="${kursy}" var="kurs">
+            <c:choose >
+                <c:when test="${pomocnik.zalogowany}">
+                    <input type="button" id="openDelDlg" value="Usuń konto" />
+                    <div id="delDlg" title="Usuwanie konta">
+                        <p>Czy na pewno usunąć konto?</p>
+                        <form id="deleteAcc" action="usunkonto">
+                            <input type="submit" value="Tak" />
+                        </form>
+                        <form id="cancelDel">
+                            <input type="button" id="cancel" value="Anuluj" />
+                        </form>
+                    </div>
+                    <h3>Zarezerwowane miejsca</h3>
+                    <c:if test="${!empty kursy}">
+                        <table class="tg">
                             <tr>
-                                <td>${kurs.dzienString}</td>
-                                <td>${kurs.godzina}</td>
-                                <td>${kurs.kierunek}</td>
-                                <td><a href="<c:url value='usun/${kurs.id}' />" >Usuń</a></td>
+                                <th width="120">Data</th>
+                                <th width="120">Godzina</th>
+                                <th width="120">Kierunek</th>
+                                <th width="60">Usuń</th>
                             </tr>
-                        </c:forEach>
-                    </table>
-                </c:if>
-            </c:if>
-            <c:if test="${!logowanie.jestZalogowany()}" >
-                <form>
-                    <h2> Musisz się zalogować, żeby obejrzeć swoje konto </h2>
-                </form>
-            </c:if>
+                            <c:forEach items="${kursy}" var="kurs">
+                                <tr>
+                                    <td>${kurs.dzienString}</td>
+                                    <td>${kurs.godzina}</td>
+                                    <td>${kurs.kierunek}</td>
+                                    <td><a href="<c:url value='konto/usun/${kurs.id}' />" >Usuń</a></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
+                </c:when>
+                <c:when test="${!pomocnik.zalogowany}" >
+                    <form>
+                        <h2> Musisz się zalogować, żeby obejrzeć swoje konto </h2>
+                    </form>
+                </c:when>
+            </c:choose>
         </section>
         <script>
             $(function () {
