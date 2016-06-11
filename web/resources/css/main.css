@@ -55,6 +55,18 @@ input[type=button], input[type=submit], input[type=reset] {
     cursor: pointer;
 }
 
+#openDelDlg {
+    margin-left: 778px;
+}
+
+#deleteAcc {
+    display: inline-block;
+}
+
+#cancelDel {
+    display: inline-block;
+}
+
 #regbtn {
     display: inline-block;
 }
@@ -66,6 +78,10 @@ input[type=button], input[type=submit], input[type=reset] {
 #logreg{
     margin-top: 55px;
     text-align: right;
+}
+
+#logoutbtn {
+    display: inline-block;
 }
 
 li a.active {

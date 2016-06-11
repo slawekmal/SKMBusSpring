@@ -58,7 +58,8 @@ public class Logowanie {
     @RequestMapping(value = "/wyloguj", method = RequestMethod.GET)
     public String wyloguj(){
         zalogowany = null;
-        return "redirect:/../";
+        System.out.println("User LogOut Successful: " + this.zalogowany);
+        return "redirect:/";
     }
 
 }

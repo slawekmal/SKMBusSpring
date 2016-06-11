@@ -19,12 +19,19 @@
         </nav>
         <header>
             <div id="logreg">
-                <form id="regbtn" action="/SKMBusSpring/rejestracja/">
-                    <input type="submit" value="Zarejestruj" />
-                </form>
-                <form id="logbtn" action="/SKMBusSpring/login/">
-                    <input type="submit" value="Zaloguj" />
-                </form>
+                <c:if test="${!logowanie.jestZalogowany()}" >
+                    <form id="regbtn" action="/SKMBusSpring/rejestracja/">
+                        <input type="submit" value="Zarejestruj" />
+                    </form>
+                    <form id="logbtn" action="/SKMBusSpring/login/">
+                        <input type="submit" value="Zaloguj" />
+                    </form>
+                </c:if>
+                <c:if test="${logowanie.jestZalogowany()}" >
+                    <form id="logoutbtn" action="/SKMBusSpring/login/wyloguj">
+                        <input type="submit" value="Wyloguj" />
+                    </form>
+                </c:if>
             </div>
         </header>
     </body>

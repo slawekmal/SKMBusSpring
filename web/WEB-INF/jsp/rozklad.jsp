@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,15 @@
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <section>
-                <h3>Rozkład</h3>
+            <form:form action="filtruj" modelAttribute="mfv" >
+                <form:select path="kierunek" >
+                    <form:option value="Wszystkie">--Wszystkie--</form:option>
+                    <form:option value="Hrubieszów - Lublin">Hrubieszów - Lublin</form:option>
+                    <form:option value="Lublin - Hrubieszów">Lublin - Hrubieszów</form:option>
+                </form:select>
+                <input type="submit" value="Filtruj" />
+            </form:form>
+            <h3>Rozkład</h3>
             <c:if test="${!empty kursy}">
                 <table class="tg">
                     <tr>

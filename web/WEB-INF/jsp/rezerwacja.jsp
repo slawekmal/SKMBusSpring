@@ -13,11 +13,26 @@
         <jsp:include page="menu.jsp"></jsp:include>
             <section>
             <form:form id="rezerwacjaForm" method="post" action="${kurs.id}/go" modelAttribute="kurs2">
-                <spring:message text="Wybrałeś kurs: ${kurs}" />
-                <form:label path="miejsca">Miejsca</form:label>
-                <form:input id="miejsca" type="number" path="miejsca" /><br>
-                <input type="submit" value="Rezerwuj" />
-                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <spring:message text="Wybrałeś kurs: ${kurs}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form:label path="miejsca">Miejsca</form:label>
+                        </td>
+                        <td>
+                            <form:input id="miejsca" type="number" path="miejsca"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="Rezerwuj" />
+                        </td>
+                    </tr>
+                </table>
                 ${message}
             </form:form>
         </section>

@@ -1,5 +1,7 @@
 package spring.kontroler;
 
+import java.util.List;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import spring.db.KlientService;
 import spring.db.KursService;
-import spring.model.Klient;
 import spring.model.Kurs;
+import spring.model.ModelForView;
 
 @Controller
 @RequestMapping(value = "/rozklad", method = RequestMethod.GET)
@@ -22,11 +24,41 @@ public class Rezerwacja {
     private KlientService klientService;
     private Kurs kurs;
     private Kurs kurs2;
-    
+    private List<Kurs> rozklad;
+    private ModelForView mfv;
+
+    @PostConstruct
+    public void init() {
+        this.mfv = new ModelForView();
+        this.rozklad = kursService.listKurs();
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String rozklad(Model model) {
-        model.addAttribute("kursy", kursService.listKurs());
+        model.addAttribute("mfv", mfv);
+        model.addAttribute("klient", Logowanie.zalogowany);
+        model.addAttribute("kursy", rozklad);
         return "rozklad";
+    }
+    @RequestMapping(value = "/filtruj", method = RequestMethod.POST)
+    public String filtruj(@ModelAttribute("mfv") ModelForView mfv2, Model model){
+        if (mfv2 != null) {
+            mfv = mfv2;
+        }
+        wybierzRozklad();
+        return "redirect:/rozklad/";
+    }
+
+    public void wybierzRozklad() {
+        if (this.mfv != null) {
+            if (this.mfv.getKierunek() != null) {
+                if (!this.mfv.getKierunek().equalsIgnoreCase("Wszystkie")) {
+                    rozklad = kursService.findKursByKierunek(mfv.getKierunek());
+                } else {
+                    rozklad = kursService.listKurs();
+                }
+            }
+        }
     }
 
     @RequestMapping("/rezerwuj/{id}")

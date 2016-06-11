@@ -1,5 +1,9 @@
 package spring.kontroler;
 
+import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +43,10 @@ public class KlientKontroler {
 
     @RequestMapping(value = "/konto", method = RequestMethod.GET)
     public String konto(Model model) {
-        model.addAttribute("kursy", Logowanie.zalogowany.getKursy());
+        List<Kurs> kursy = null;
+        if(Logowanie.zalogowany != null)
+            kursy = Logowanie.zalogowany.getKursy();
+        model.addAttribute("kursy", kursy);
         return "konto";
     }
 
@@ -50,6 +57,16 @@ public class KlientKontroler {
             klientService.updateKlient(Logowanie.zalogowany);
         }
        return "redirect:/konto";
+    }
+    
+    @RequestMapping("/konto/usunkonto")
+    public String usunKonto() {
+        if(Logowanie.zalogowany != null){
+            this.klientService.deleteKlient(Logowanie.zalogowany);
+            System.out.println("Delete succesful: " + Logowanie.zalogowany);
+            
+        }
+        return "redirect:/";
     }
 
 }
