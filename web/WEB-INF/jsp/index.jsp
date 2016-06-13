@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-        <title>Welcome to Spring Web MVC project</title>
+        <title>Witaj na stronie SKM Bus</title>
     </head>
 
     <body>

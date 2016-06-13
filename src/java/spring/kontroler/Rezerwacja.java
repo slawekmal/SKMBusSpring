@@ -1,10 +1,8 @@
 package spring.kontroler;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,10 +35,11 @@ public class Rezerwacja {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String rozklad(Model model) {
-        if(Logowanie.zalogowany != null)
+        if (Logowanie.zalogowany != null) {
             this.pomocnik.setZalogowany(true);
-        else
+        } else {
             this.pomocnik.setZalogowany(false);
+        }
         model.addAttribute("pomocnik", pomocnik);
         model.addAttribute("klient", Logowanie.zalogowany);
         rozklad.sort(new KursComparator());
@@ -72,8 +71,9 @@ public class Rezerwacja {
     @RequestMapping("/rezerwuj/{id}")
     public String rezerwacja(@PathVariable("id") long id, Model model) {
         kurs = kursService.findKursById(id);
-        if(pomocnik == null)
+        if (pomocnik == null) {
             pomocnik = new Pomocnik();
+        }
         if (kurs != null) {
             model.addAttribute("kurs", kurs);
             model.addAttribute("pomocnik", pomocnik);
@@ -90,20 +90,13 @@ public class Rezerwacja {
                 for (int i = 0; i < pomocnik.getMiejsca(); i++) {
                     Logowanie.zalogowany.getKursy().add(kurs);
                 }
+                rozklad = kursService.listKurs();
                 klientService.updateKlient(Logowanie.zalogowany);
                 model.addAttribute("klient", Logowanie.zalogowany);
                 return "redirect:../../../konto";
             }
         }
         return "rezerwacja";
-    }
-
-    public class KursComparator implements Comparator<Kurs> {
-
-        @Override
-        public int compare(Kurs k1, Kurs k2) {
-            return k1.getId().compareTo(k2.getId());
-        }
     }
 
 }

@@ -26,7 +26,7 @@
                         </form>
                     </c:when>    
                     <c:otherwise>
-                        <form id="regbtn" action="/SKMBusSpring/rejestracja/">
+                        <form id="regbtn" action="/SKMBusSpring/rejestracja">
                             <input type="submit" value="Zarejestruj" />
                         </form>
                         <form id="logbtn" action="/SKMBusSpring/login/">

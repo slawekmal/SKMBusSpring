@@ -20,7 +20,9 @@
                 <table>
                     <tr>
                         <td>
-                            <spring:message text="Wybrałeś kurs: ${kurs}" />
+                            <spring:message text="Wybrałeś kurs: ${kurs}. Cena jednego biletu to 17 zł.
+                                            Opłata za przejazd uiszczana jest podczas faktycznego zakupu biletu
+                                            u kierowcy." />
                         </td>
                     </tr>
                     <tr>
@@ -37,7 +39,6 @@
                         </td>
                     </tr>
                 </table>
-                ${message}
             </form:form>
         </section>
         <script>
@@ -45,9 +46,9 @@
                 $("#miejsca").spinner({
                     spin: function (event, ui) {
                         if (ui.value > ${kurs.miejsca}) {
-                            $(this).spinner("value", 0);
+                            $(this).spinner("value", 1);
                             return false;
-                        } else if (ui.value < 0) {
+                        } else if (ui.value < 1) {
                             $(this).spinner("value", ${kurs.miejsca});
                             return false;
                         }

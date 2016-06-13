@@ -13,6 +13,7 @@
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <section>
+                ${regSuccess}
             <form:form id="loginForm" method="post" action="go" modelAttribute="klient">
                 <table>
                     <tr>
@@ -37,12 +38,12 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="submit" value="Zaloguj się" />
+                            <input id="subLog" type="submit" value="Zaloguj się"/>
                         </td>
                     </tr>
                 </table>
                 <br>
-                ${message}
+                <label id="logLab" for="loginForm" class="error">${message}</label>
             </form:form>
         </section>
     </body>

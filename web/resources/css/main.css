@@ -121,3 +121,22 @@ table {
 h3 {
     margin-left: 50px;
 }
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#koszt {
+    color: teal;
+    font-weight: bold; 
+    margin-left: 50px;
+}
+
+#subLog {
+    margin-left:160px;
+}
+
+#logLab {
+    margin-left: 140px;
+}

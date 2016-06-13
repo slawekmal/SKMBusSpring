@@ -30,6 +30,8 @@
                         </form>
                     </div>
                     <h3>Zarezerwowane miejsca</h3>
+                    <label id="koszt">Łączny koszt: ${koszt} </label>
+                    <br></br>
                     <c:if test="${!empty kursy}">
                         <table class="tg">
                             <tr>
@@ -43,7 +45,7 @@
                                     <td>${kurs.dzienString}</td>
                                     <td>${kurs.godzina}</td>
                                     <td>${kurs.kierunek}</td>
-                                    <td><a href="<c:url value='konto/usun/${kurs.id}' />" >Usuń</a></td>
+                                    <td><a href="<c:url value='usun/${kurs.id}' />" >Usuń</a></td>
                                 </tr>
                             </c:forEach>
                         </table>

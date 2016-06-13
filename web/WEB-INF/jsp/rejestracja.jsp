@@ -13,7 +13,7 @@
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <section>
-            <form:form action="rejestracja/go" modelAttribute="klient">
+            <form:form action="rejestracja/go" modelAttribute="klient" method="post">
                 <table>
                     <tr>
                         <td>
@@ -24,6 +24,7 @@
                         <td>
                             <form:input path="imie" />
                         </td>
+                        <td><form:errors path="imie" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td>
@@ -34,6 +35,7 @@
                         <td>
                             <form:input path="nazwisko" />
                         </td>
+                        <td><form:errors path="nazwisko" cssClass="error" /></td>
                     </tr>
 
                     <tr>
@@ -45,6 +47,7 @@
                         <td>
                             <form:input path="email" />
                         </td>
+                        <td><form:errors path="email" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td>
@@ -55,10 +58,11 @@
                         <td>
                             <form:password path="haslo" />
                         </td>
+                        <td><form:errors path="haslo" cssClass="error" /></td>
                     </tr>
 
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="submit"
                                    value="<spring:message text="Zarejestruj"/>" />
                         </td>

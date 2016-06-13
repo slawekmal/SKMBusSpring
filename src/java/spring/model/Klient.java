@@ -3,6 +3,7 @@ package spring.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -28,8 +31,10 @@ public class Klient implements Serializable {
     private String nazwisko;
     @NotEmpty(message = "Pole nie może być puste")
     @Email(message = "Niepoprawny email")
+    @Column(unique = true)
     private String email;
     @NotEmpty(message = "Pole nie może być puste")
+    @Size(min=6, max=30, message = "Haslo musi zawierac od 6 do 30 znaków")
     private String haslo;
 
     @ManyToMany(fetch=FetchType.EAGER)

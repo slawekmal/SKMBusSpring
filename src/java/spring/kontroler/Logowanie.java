@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.db.KlientService;
 import spring.model.Klient;
 
@@ -22,26 +24,22 @@ public class Logowanie {
     public static Klient zalogowany;
     
    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView model = new ModelAndView("logowanie");
-        Klient klient = new Klient();
-        model.addObject("klient", klient);
-        return model;
+    public String loginForm(Model model) {
+        if(!model.containsAttribute("klient"))
+            model.addAttribute("klient", new Klient());       
+        return "logowanie";
     }
 
     @RequestMapping(value = "/go", method = RequestMethod.POST)
     public String zaloguj(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("klient") Klient klient) throws SQLException {
-        ModelAndView model = null;
         try {
-            this.zalogowany = klientService.isValidUser(klient.getEmail(), klient.getHaslo());
-            if (this.zalogowany != null) {
-                System.out.println("User Login Successful: " + this.zalogowany);
-                request.setAttribute("loggedInUser", this.zalogowany);
-                model = new ModelAndView("index");
+            Logowanie.zalogowany = klientService.isValidUser(klient.getEmail(), klient.getHaslo());
+            if (Logowanie.zalogowany != null) {
+                System.out.println("User Login Successful: " + Logowanie.zalogowany);
+                request.setAttribute("loggedInUser", Logowanie.zalogowany);
             } else {
-                model = new ModelAndView("logowanie");
-                model.addObject("klient", klient);
-                request.setAttribute("message", "Błędne dane");
+                request.setAttribute("message", "Błędne dane. Upewnij się czy podałeś poprawny email i hasło");
+                return "logowanie";
             }
 
         } catch (Exception e) {
@@ -49,10 +47,6 @@ public class Logowanie {
         }
 
         return "redirect:/";
-    }
-    
-    public boolean jestZalogowany(){
-        return zalogowany != null;
     }
     
     @RequestMapping(value = "/wyloguj", method = RequestMethod.GET)

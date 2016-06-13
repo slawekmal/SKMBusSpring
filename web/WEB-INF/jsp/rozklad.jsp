@@ -41,9 +41,12 @@
                             <td>${kurs.kierunek}</td>
                             <td>${kurs.miejsca}</td>
                             <c:choose>
-                                <c:when test="${pomocnik.zalogowany}">
+                                <c:when test="${pomocnik.zalogowany && kurs.miejsca > 0}">
                                     <td><a href="<c:url value='rezerwuj/${kurs.id}' />" >Rezerwuj</a></td>
-                                </c:when>    
+                                </c:when>
+                                <c:when test="${kurs.miejsca <= 0}">
+                                    <td>Brak miejsc</td>
+                                </c:when>
                                 <c:otherwise>
                                     <td>Zaloguj się by móc rezerwować miejsca</td>
                                 </c:otherwise>
