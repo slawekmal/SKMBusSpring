@@ -34,7 +34,7 @@ public class Klient implements Serializable {
     @Column(unique = true)
     private String email;
     @NotEmpty(message = "Pole nie może być puste")
-    @Size(min=6, max=30, message = "Haslo musi zawierac od 6 do 30 znaków")
+    @Size(min=6, max=18, message = "Haslo musi zawierac od 6 do 18 znaków")
     private String haslo;
 
     @ManyToMany(fetch=FetchType.EAGER)

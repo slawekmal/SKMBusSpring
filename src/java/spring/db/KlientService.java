@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring.model.Klient;
-import spring.model.Kurs;
 
 @Service
 public class KlientService {
@@ -34,7 +33,7 @@ public class KlientService {
     }
 
     @Transactional
-    public List<Klient> listKlients() {
+    public List<Klient> listKlient() {
         return klientDAO.listKlient();
     }
 

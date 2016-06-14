@@ -23,7 +23,7 @@ public class Generator {
 
     @PostConstruct
     public void wrzucDane() {
-        if (klientService.listKlients().isEmpty()) {
+        if (klientService.listKlient().isEmpty()) {
 
             Klient admin = new Klient("Admin", "Admin", "admin@admin.com", "admin");
 
